@@ -1,0 +1,6 @@
+{
+    "cSpell.words": [
+        "Geocoder"
+    ],
+    "cmake.sourceDirectory": "${workspaceFolder}/yatri_app/linux/flutter"
+}
