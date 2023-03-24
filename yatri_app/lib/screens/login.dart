@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:yatri_app/components/googleSignIn.dart';
 import 'package:yatri_app/main.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -167,12 +168,10 @@ class logoButtons extends StatelessWidget {
         ),
       ),
       Container(
-        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-        child: IconButton(
-          icon: Icon(FontAwesomeIcons.google, size: 40),
-          onPressed: () => {},
-        ),
-      ),
+          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+          child: IconButton(
+              icon: Icon(FontAwesomeIcons.google, size: 40),
+              onPressed: () => {})),
       Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
         child: IconButton(

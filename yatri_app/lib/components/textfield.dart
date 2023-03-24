@@ -28,6 +28,11 @@ class _textfieldState extends State<textfield> {
         children: [
           Expanded(
             child: GestureDetector(
+              onLongPress: () {
+                setState(() {
+                  _obscureText = true;
+                });
+              },
               onTap: () {
                 setState(() {
                   _obscureText = false;

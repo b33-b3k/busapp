@@ -65,43 +65,14 @@ class _SignUpState extends State<SignUp> {
           leading: Container(
             padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
             child: IconButton(
-              icon: const Icon(
-                FeatherIcons.arrowLeftCircle,
-                color: Colors.black,
-                size: 40,
-              ),
-              onPressed: () async {
-                final email = _emailController.text;
-                final password = _passwordController.text;
-
-                try {
-                  final userCredentials = await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                    email: email,
-                    password: password,
-                  );
-                  final user = FirebaseAuth.instance.currentUser;
-                  await user?.sendEmailVerification();
-                  Navigator.pushNamed(context, '/verify');
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text("User registered successfully")),
-                  );
-                } on FirebaseAuthException catch (e) {
-                  String errorMessage;
-                  if (e.code == "user-not-found") {
-                    errorMessage = "No user found for that email";
-                  } else if (e.code == "wrong-password") {
-                    errorMessage = "Wrong password provided for that user";
-                  } else if (e.code == "email-already-exists") {
-                    errorMessage = "Email already exists";
-                  }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(e.code)),
-                  );
-                }
-              },
-            ),
+                icon: const Icon(
+                  FeatherIcons.arrowLeftCircle,
+                  color: Colors.black,
+                  size: 40,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/welcome');
+                }),
           ),
           actions: [
             Container(

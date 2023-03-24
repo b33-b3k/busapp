@@ -15,19 +15,21 @@ import 'dart:async';
 import './screens/login.dart';
 import 'screens/forgotpass.dart';
 import 'screens/verify.dart';
+import 'components/googleSignIn.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(
       child: MaterialApp(
-    home: Verify(),
+    home: LoginPage(),
     routes: {
       '/mapApp': (context) => MapApp(),
       '/forgotPass': (context) => ForgotPass(),
       '/signUp': (context) => SignUp(),
       '/login': (context) => LoginPage(),
       '/verify': (context) => Verify(),
+      '/welcome': (context) => WelcomePage()
 
       //verify null
     },

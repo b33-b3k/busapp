@@ -23,7 +23,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -63,16 +66,5 @@ class DefaultFirebaseOptions {
     projectId: 'saha-yatri-fef25',
     databaseURL: 'https://saha-yatri-fef25-default-rtdb.firebaseio.com',
     storageBucket: 'saha-yatri-fef25.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDIjzo_VC2rCqgJu_DR48Gola2vsveKmrk',
-    appId: '1:231470397469:ios:4d024f771ace5edd9b6ef4',
-    messagingSenderId: '231470397469',
-    projectId: 'saha-yatri-fef25',
-    databaseURL: 'https://saha-yatri-fef25-default-rtdb.firebaseio.com',
-    storageBucket: 'saha-yatri-fef25.appspot.com',
-    iosClientId: '231470397469-sel1rhl01vcaa66nbf34drttrlensfad.apps.googleusercontent.com',
-    iosBundleId: 'com.example.yatriApp',
   );
 }

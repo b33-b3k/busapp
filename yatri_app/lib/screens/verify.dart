@@ -49,11 +49,11 @@ class Verify extends StatelessWidget {
                 onPressed: () {
                   Navigator.popAndPushNamed(
                     context,
-                    '/login',
+                    '/mapApp',
                   );
                 },
                 child: const Text(
-                  "Go to Login",
+                  "Get Started",
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
