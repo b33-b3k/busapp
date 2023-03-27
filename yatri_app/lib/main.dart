@@ -2,8 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:yatri_app/components/tripHistory.dart';
+import 'package:yatri_app/screens/homepage.dart';
 import 'package:yatri_app/screens/login.dart';
+import 'package:yatri_app/screens/profile.dart';
 import 'package:yatri_app/screens/register.dart';
+import 'package:yatri_app/screens/splashscreen.dart';
 import 'package:yatri_app/screens/welcome.dart';
 import 'components/appBar.dart';
 import 'firebase_options.dart';
@@ -22,14 +26,15 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(
       child: MaterialApp(
-    home: LoginPage(),
+    home: MapApp(),
     routes: {
       '/mapApp': (context) => MapApp(),
       '/forgotPass': (context) => ForgotPass(),
       '/signUp': (context) => SignUp(),
       '/login': (context) => LoginPage(),
       '/verify': (context) => Verify(),
-      '/welcome': (context) => WelcomePage()
+      '/welcome': (context) => WelcomePage(),
+      '/profile': (context) => ProfileScreen()
 
       //verify null
     },

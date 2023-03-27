@@ -3,10 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:yatri_app/components/appBar.dart';
 import 'package:yatri_app/components/textfield.dart';
 
+import '../components/googleSignIn.dart';
+import '../components/transition.dart';
 import '../main.dart';
+import 'homepage.dart';
 import 'login.dart';
 
 final auth = FirebaseAuth.instance;
@@ -59,31 +64,9 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: Container(
-            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-            child: IconButton(
-                icon: const Icon(
-                  FeatherIcons.arrowLeftCircle,
-                  color: Colors.black,
-                  size: 40,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/welcome');
-                }),
-          ),
-          actions: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: const Icon(
-                Icons.image,
-                color: Colors.black,
-              ),
-            )
-          ],
-        ),
+        appBar: ApppBar(context, () {
+          Navigator.pushNamed(context, '/login');
+        }),
         body: Column(children: [
           Container(
             padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
@@ -164,7 +147,7 @@ class _SignUpState extends State<SignUp> {
           ),
           Container(
               child: Column(
-            children: const [
+            children: [
               Divider(
                 color: Colors.black,
                 thickness: 1,
@@ -179,7 +162,39 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: 20,
               ),
-              logoButtons(),
+              Column(
+                children: [
+                  SignInButton(
+                    Buttons.Google,
+                    text: "Google",
+                    onPressed: () async {
+                      await signInWithGoogle().then((result) {
+                        if (result != null) {
+                          Navigator.push(
+                              context, SlideRightRoute(page: HomePage()));
+                        }
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  //facebook
+                  SignInButton(Buttons.Facebook,
+                      text: " Facebook",
+                      padding: EdgeInsets.all(10),
+                      onPressed: () {}
+                      // onPressed: () async {
+                      //   await signInWithFacebook().then((result) {
+                      //     if (result != null) {
+                      //       Navigator.push(
+                      //           context, SlideRightRoute(page: HomePage()));
+                      //     }
+                      //   });
+                      // },
+                      ),
+                ],
+              ),
             ],
           ))
         ]));

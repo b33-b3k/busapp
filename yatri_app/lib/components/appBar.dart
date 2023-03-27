@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:yatri_app/screens/profile.dart';
 
-AppBar ApppBar(var onPressed) {
+AppBar ApppBar(BuildContext context, var onPressed) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
     leading: Container(
-      padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+      padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
       child: IconButton(
         icon: const Icon(
           FeatherIcons.arrowLeftCircle,
@@ -16,14 +17,22 @@ AppBar ApppBar(var onPressed) {
         onPressed: onPressed,
       ),
     ),
+
+    //add a user section at the last of the appbar
     actions: [
       Container(
-        padding: const EdgeInsets.all(20),
-        child: const Icon(
-          Icons.image,
-          color: Colors.black,
+        padding: const EdgeInsets.fromLTRB(0, 8, 10, 8),
+        child: IconButton(
+          icon: const Icon(
+            FeatherIcons.user,
+            color: Colors.black,
+            size: 40,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
         ),
-      )
+      ),
     ],
   );
 }

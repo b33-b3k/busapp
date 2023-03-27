@@ -12,11 +12,9 @@ class Verify extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         //verify with email firebase
-        appBar: ApppBar(
-          () {
-            Navigator.pop(context);
-          },
-        ),
+        appBar: ApppBar(context, () {
+          Navigator.pop(context);
+        }),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

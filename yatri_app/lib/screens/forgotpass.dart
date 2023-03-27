@@ -10,11 +10,9 @@ class ForgotPass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ApppBar(
-        () {
-          Navigator.popAndPushNamed(context, '/login');
-        },
-      ),
+      appBar: ApppBar(context, () {
+        Navigator.popAndPushNamed(context, '/login');
+      }),
       body: Column(
         children: [
           Container(

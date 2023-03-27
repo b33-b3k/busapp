@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_geocoder/geocoder.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:yatri_app/components/navbar.dart';
 
 class MapApp extends StatefulWidget {
   @override
@@ -108,6 +109,7 @@ class _MapAppState extends State<MapApp> {
             ],
           ),
         ),
+        // const BottomBarPage()
       ],
     );
   }

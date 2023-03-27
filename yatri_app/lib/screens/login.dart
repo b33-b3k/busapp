@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:yatri_app/components/googleSignIn.dart';
+import 'package:yatri_app/components/transition.dart';
 import 'package:yatri_app/main.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +13,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:yatri_app/screens/homepage.dart';
+import 'package:yatri_app/screens/mapApp.dart';
+
+import '../components/button.dart';
 
 final auth = FirebaseAuth.instance;
 final currentUser = auth.currentUser;
@@ -42,21 +49,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: ApppBar(
-          () {
-            Navigator.pop(context);
-          },
-        ),
-        body: Column(children: [
+      appBar: ApppBar(context, () {
+        Navigator.pop(context);
+      }),
+      body: Column(
+        children: [
           Container(
             padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
             child: Row(
               children: const [
                 Text(
-                  "Login",
+                  "Log in",
                   style: TextStyle(
-                    fontSize: 60,
-                    fontWeight: FontWeight.normal,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
@@ -80,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
             width: 300,
             height: 50,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: Colors.black),
+                borderRadius: BorderRadius.circular(20), color: Colors.black),
             child: TextButton(
               onPressed: () async {
                 final email = emailController.text;
@@ -96,8 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                   }
 
                   //login
-////////////////////////////////////changed this
-                  Navigator.pushNamed(context, '/verify');
+
+                  Navigator.push(context, SlideRightRoute(page: MapApp()));
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                         content: Text("User registered successfully")),
@@ -117,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                 }
               },
               child: const Text(
-                "Login",
+                "Log in",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -128,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: Column(
-                children: const [
+                children: [
                   Divider(
                     color: Colors.black,
                     thickness: 1,
@@ -143,49 +149,44 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  logoButtons(),
+                  Column(
+                    children: [
+                      SignInButton(
+                        Buttons.Google,
+                        text: "Google",
+                        onPressed: () async {
+                          await signInWithGoogle().then((result) {
+                            if (result != null) {
+                              Navigator.push(
+                                  context, SlideRightRoute(page: HomePage()));
+                            }
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //facebook
+                      SignInButton(Buttons.Facebook,
+                          text: " Facebook",
+                          padding: EdgeInsets.all(10),
+                          onPressed: () {}
+                          // onPressed: () async {
+                          //   await signInWithFacebook().then((result) {
+                          //     if (result != null) {
+                          //       Navigator.push(
+                          //           context, SlideRightRoute(page: HomePage()));
+                          //     }
+                          //   });
+                          // },
+                          ),
+                    ],
+                  ),
                 ],
+                //make a google sign button??
               ))
-        ]));
-  }
-}
-
-class logoButtons extends StatelessWidget {
-  const logoButtons({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Container(
-        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-        child: IconButton(
-          icon: const Icon(
-            FontAwesomeIcons.facebook,
-            color: Colors.blue,
-            size: 40,
-          ),
-          onPressed: () {},
-        ),
+        ],
       ),
-      Container(
-          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-          child: IconButton(
-              icon: Icon(FontAwesomeIcons.google, size: 40),
-              onPressed: () => {})),
-      Container(
-        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-        child: IconButton(
-          icon: const Icon(
-            FontAwesomeIcons.apple,
-            color: Colors.grey,
-            size: 40,
-          ),
-          onPressed: () {},
-        ),
-      ),
-    ]
-        //icon button
-
-        );
+    );
   }
 }
